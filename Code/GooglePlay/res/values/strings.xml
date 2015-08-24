@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GooglePlay</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- drawer的开关描述 -->
+    <string name="main_drawer_toggle_open">open</string>
+    <string name="main_drawer_toggle_close">close</string>
+
+    <!-- 主页的titles -->
+    <string-array name="main_titles">
+        <item>首页</item>
+        <item>应用</item>
+        <item>游戏</item>
+        <item>专题</item>
+        <item>推荐</item>
+        <item>分类</item>
+        <item>排行</item>
+    </string-array>
+
+</resources>
