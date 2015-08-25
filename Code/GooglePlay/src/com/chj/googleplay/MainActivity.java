@@ -2,6 +2,11 @@ package com.chj.googleplay;
 
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.support.v7.app.ActionBar;
@@ -9,6 +14,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.chj.googleplay.factory.PagerFactory;
+import com.chj.googleplay.ui.fragment.BaseFragment;
+import com.chj.googleplay.utils.UIUtils;
+import com.chj.indicator.lib.TabSlidingIndicator;
 
 /**
  * @包名: com.chj.googleplay
@@ -24,14 +34,18 @@ import android.view.View;
  * 
  * @更新描述:
  */
-public class MainActivity extends ActionBarActivity implements DrawerListener
+public class MainActivity extends ActionBarActivity implements DrawerListener, OnPageChangeListener
 {
 
 	private ActionBar				mActionBar;	// actionbar实例
 
 	private DrawerLayout			mDrawerLayout;
-
 	private ActionBarDrawerToggle	mDrawerToggle;	// actionbar菜单的开关
+
+	private TabSlidingIndicator		mIndicator;	// indicator
+	private ViewPager				mPager;		// viewpager
+
+	private String[]				mTitles;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,12 +53,19 @@ public class MainActivity extends ActionBarActivity implements DrawerListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_main);
 
+		initView();
 		initActionBar();
+		initData();
 	}
 
-	/**
-	 * 初始化ActionBar
-	 */
+	/** 初始化视图 */
+	private void initView()
+	{
+		mIndicator = (TabSlidingIndicator) findViewById(R.id.main_indicator);
+		mPager = (ViewPager) findViewById(R.id.main_viewpager);
+	}
+
+	/** 初始化ActionBar */
 	private void initActionBar()
 	{
 		mActionBar = getSupportActionBar();
@@ -65,11 +86,29 @@ public class MainActivity extends ActionBarActivity implements DrawerListener
 
 		// 设置mDrawLayout的监听
 		mDrawerLayout.setDrawerListener(this);
+
+		// 设置ViewPager监听
+		mIndicator.setOnPageChangeListener(this);
+
 	}
 
-	/**
-	 * 创建选项菜单(ActionBar)时调用
-	 */
+	/** 加载数据 */
+	private void initData()
+	{
+		// 加载list数据
+		mTitles = UIUtils.getStringArray(R.array.main_titles);
+
+		// 给viewpager加载数据---> Adapter ---> list
+		mPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+
+		// 设置indicator的颜色
+		mIndicator.setTextColor(UIUtils.getCoclor(R.color.tab_text_normal), UIUtils.getCoclor(R.color.tab_text_selected));
+
+		// 给indicator配置Viewpager
+		mIndicator.setViewPager(mPager);
+	}
+
+	/** 创建选项菜单(ActionBar)时调用 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -77,9 +116,7 @@ public class MainActivity extends ActionBarActivity implements DrawerListener
 		return true;
 	}
 
-	/**
-	 * item点击时的操作
-	 */
+	/** item点击时的操作 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -97,40 +134,94 @@ public class MainActivity extends ActionBarActivity implements DrawerListener
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * 当抽屉的位置变化时，此方法调用
-	 */
+	/** 当抽屉的位置变化时，此方法调用 */
 	@Override
 	public void onDrawerSlide(View drawerView, float slideOffset)
 	{
 		mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
 	}
 
-	/**
-	 * 当抽屉开启时，此方法调用
-	 */
+	/** 当抽屉开启时，此方法调用 */
 	@Override
 	public void onDrawerOpened(View drawerView)
 	{
 		mDrawerToggle.onDrawerOpened(drawerView);
 	}
 
-	/**
-	 * 当抽屉关闭时，此方法调用
-	 */
+	/** 当抽屉关闭时，此方法调用 */
 	@Override
 	public void onDrawerClosed(View drawerView)
 	{
 		mDrawerToggle.onDrawerClosed(drawerView);
 	}
 
-	/**
-	 * 当抽屉的状态发生变化时，此方法调用
-	 */
+	/** 当抽屉的状态发生变化时，此方法调用 */
 	@Override
 	public void onDrawerStateChanged(int newState)
 	{
 		mDrawerToggle.onDrawerStateChanged(newState);
+	}
+
+	/**
+	 * 自定义MainPagerAdapter
+	 * 
+	 * @FragmentStatePagerAdapter : 在多页面显示时会销毁fragment
+	 * @FragmentPagerAdapter : 不会销毁fragment
+	 */
+	class MainPagerAdapter extends FragmentStatePagerAdapter
+	{
+
+		public MainPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+
+		/** 获取Fragment指定的位置 */
+		@Override
+		public Fragment getItem(int position)
+		{
+			// 通过position去找到对应的fragment
+			Fragment fragment = PagerFactory.getFragment(position);
+			return fragment;
+		}
+
+		/** 获取views的数量 */
+		@Override
+		public int getCount()
+		{
+			if (mTitles != null) { return mTitles.length; }
+			return 0;
+		}
+
+		/** 获取请求页面的标题 */
+		@Override
+		public CharSequence getPageTitle(int position)
+		{
+			if (mTitles != null) { return mTitles[position]; }
+			return super.getPageTitle(position);
+		}
+
+	}
+
+	@Override
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	/** 页面选中时才去加载数据 */
+	@Override
+	public void onPageSelected(int position)
+	{
+		BaseFragment fragment = PagerFactory.getFragment(position);
+		fragment.loadData();
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int state)
+	{
+		// TODO Auto-generated method stub
+
 	}
 
 }

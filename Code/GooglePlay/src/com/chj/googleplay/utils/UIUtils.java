@@ -99,4 +99,16 @@ public class UIUtils
 		return getContext().getPackageName();
 	}
 
+	/** 获取字符串数组 */
+	public static String[] getStringArray(int resId)
+	{
+		return getResources().getStringArray(resId);
+	}
+
+	/** 获取颜色值 */
+	public static int getCoclor(int resId)
+	{
+		return getResources().getColor(resId);
+	}
+
 }
