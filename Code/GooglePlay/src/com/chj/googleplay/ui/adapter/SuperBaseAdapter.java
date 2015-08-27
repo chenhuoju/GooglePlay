@@ -181,6 +181,13 @@ public abstract class SuperBaseAdapter<T> extends BaseAdapter implements OnItemC
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
+		// TODO:bug修复-->headerView过滤
+		if (mListView instanceof ListView)
+		{
+			int headerViewsCount = ((ListView) mListView).getHeaderViewsCount();
+			position = position - headerViewsCount;
+		}
+
 		int type = getItemViewType(position);
 		if (type == VIEW_TYPE_LOAD_MORE)
 		{
@@ -197,11 +204,13 @@ public abstract class SuperBaseAdapter<T> extends BaseAdapter implements OnItemC
 		}
 		else
 		{
-			if (mListView instanceof ListView)
-			{
-				int headerViewsCount = ((ListView) mListView).getHeaderViewsCount();
-				position = position - headerViewsCount;
-			}
+			// TODO:无网络，点击重新加载出错--->bug修复，提到外面
+			// if (mListView instanceof ListView)
+			// {
+			// int headerViewsCount = ((ListView)
+			// mListView).getHeaderViewsCount();
+			// position = position - headerViewsCount;
+			// }
 
 			// 点击普通的item
 			onInnerItemClick(parent, view, position, id);
