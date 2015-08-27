@@ -111,4 +111,16 @@ public class UIUtils
 		return getResources().getColor(resId);
 	}
 
+	/** 执行延时操作 */
+	public static void postDelayed(Runnable task, long delay)
+	{
+		getMainThreadHandler().postDelayed(task, delay);
+	}
+
+	/** 从消息队列中移除任务 */
+	public static void removeCallbacks(Runnable task)
+	{
+		getMainThreadHandler().removeCallbacks(task);
+	}
+
 }

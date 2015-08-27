@@ -14,6 +14,7 @@ import com.chj.googleplay.ui.adapter.SuperBaseAdapter;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
 import com.chj.googleplay.ui.holder.AppItemHolder;
 import com.chj.googleplay.ui.holder.BaseHolder;
+import com.chj.googleplay.ui.holder.HomePictureHolder;
 import com.chj.googleplay.ui.weight.BaseListView;
 import com.chj.googleplay.utils.UIUtils;
 
@@ -57,6 +58,13 @@ public class HomeFragment extends BaseFragment
 		// mListView.setBackgroundColor(UIUtils.getCoclor(R.color.bg));
 		// 抽取，优化之后
 		BaseListView mListView = new BaseListView(UIUtils.getContext());
+
+		// 加载轮播图
+		HomePictureHolder pictureHolder = new HomePictureHolder();
+		// 加载头
+		mListView.addHeaderView(pictureHolder.getRootView());
+		// 给holder数据
+		pictureHolder.setData(mPictures);
 
 		// adapter ---> list
 		mListView.setAdapter(new AppListAdapter(mListView, mListDatas));
