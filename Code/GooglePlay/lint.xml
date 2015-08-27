@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ResourceAsColor">
+        <ignore path="src/com/chj/googleplay/ui/fragment/HomeFragment.java" />
+    </issue>
+    <issue id="ShowToast">
+        <ignore path="src/com/chj/googleplay/ui/fragment/HomeFragment.java" />
+    </issue>
+</lint>

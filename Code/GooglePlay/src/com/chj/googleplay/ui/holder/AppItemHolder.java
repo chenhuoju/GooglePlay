@@ -1,10 +1,18 @@
 package com.chj.googleplay.ui.holder;
 
-import com.chj.googleplay.R;
-import com.chj.googleplay.utils.UIUtils;
-
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.chj.googleplay.R;
+import com.chj.googleplay.bean.AppInfoBean;
+import com.chj.googleplay.utils.BitmapHelper;
+import com.chj.googleplay.utils.Constants;
+import com.chj.googleplay.utils.StringUtils;
+import com.chj.googleplay.utils.UIUtils;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
  * @param <T>
@@ -21,29 +29,48 @@ import android.widget.TextView;
  * 
  * @更新描述:
  */
-public class AppItemHolder extends BaseHolder<String>
+public class AppItemHolder extends BaseHolder<AppInfoBean>
 {
-	private TextView	tv1;
-	private TextView	tv2;
+	@ViewInject(R.id.item_appinfo_tv_title)
+	private TextView	mTvTitle;
+
+	@ViewInject(R.id.item_appinfo_tv_des)
+	private TextView	mTvDes;
+
+	@ViewInject(R.id.item_appinfo_tv_size)
+	private TextView	mTvSize;
+
+	@ViewInject(R.id.item_appinfo_rb_stars)
+	private RatingBar	mRbStars;
+
+	@ViewInject(R.id.item_appinfo_iv_icon)
+	private ImageView	mIvIcon;
 
 	@Override
 	protected View initView()
 	{
-		View view = View.inflate(UIUtils.getContext(), R.layout.tmp_item, null);
+		View view = View.inflate(UIUtils.getContext(), R.layout.item_app_info, null);
 
-		tv1 = (TextView) view.findViewById(R.id.tmp_tv_1);
-		tv2 = (TextView) view.findViewById(R.id.tmp_tv_2);
+		// View注入
+		ViewUtils.inject(this, view);
 
 		return view;
 	}
 
 	@Override
-	protected void refreshUI(String data)
+	protected void refreshUI(AppInfoBean data)
 	{
 		// 给View铺数据
-		tv1.setText("title : " + data);
-		tv2.setText("content : " + data);
+		mTvTitle.setText(data.name);
+		mTvDes.setText(data.des);
+		mTvSize.setText(StringUtils.formatFileSize(data.size));
+		mRbStars.setRating(data.stars);
 
+		// 设置默认图片
+		mIvIcon.setImageResource(R.drawable.ic_default);
+		// 图片设置
+		String uri = Constants.BASE_IMAGE_URL + data.iconUrl;
+		BitmapHelper.display(mIvIcon, uri);
 	}
 
 }

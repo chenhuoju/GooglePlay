@@ -1,7 +1,7 @@
 package com.chj.googleplay.ui.fragment;
 
-import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
-import com.chj.googleplay.utils.UIUtils;
+import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+
+import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
+import com.chj.googleplay.utils.UIUtils;
 
 /**
  * @包名: com.chj.googleplay.ui.fragment
@@ -86,6 +89,26 @@ public abstract class BaseFragment extends Fragment
 		{
 			mPager.loadData();
 		}
+	}
+
+	/** 状态判断 */
+	@SuppressWarnings("rawtypes")
+	protected LoadedResult checkState(Object data)
+	{
+		if (data == null) { return LoadedResult.EMPTY; }
+
+		if (data instanceof List)
+		{
+			if (((List) data).size() == 0) { return LoadedResult.EMPTY; }
+		}
+
+		if (data instanceof Map)
+		{
+			if (((Map) data).size() == 0) { return LoadedResult.EMPTY; }
+		}
+
+		return LoadedResult.SUCCESS;
+
 	}
 
 	/** view成功显示时此方法调用 */

@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 
 import com.chj.googleplay.R;
+import com.chj.googleplay.manager.ThreadManager;
 import com.chj.googleplay.utils.UIUtils;
 
 /**
@@ -169,7 +170,10 @@ public abstract class LoadingPager extends FrameLayout implements OnClickListene
 		{
 			mCurrentState = STATE_LOADING;
 
-			new Thread(new LoadDataTask()).start();
+			// 利用线程池实现的
+			ThreadManager.getLongRunPool().execute(new LoadDataTask());
+			// 利用线程实现的
+			// new Thread(new LoadDataTask()).start();
 		}
 
 		safeUpdateUIStyle();

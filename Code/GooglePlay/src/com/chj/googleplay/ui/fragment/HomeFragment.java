@@ -1,13 +1,20 @@
 package com.chj.googleplay.ui.fragment;
 
-import java.util.LinkedList;
 import java.util.List;
 
+import android.graphics.Color;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.chj.googleplay.R;
+import com.chj.googleplay.bean.AppInfoBean;
+import com.chj.googleplay.bean.HomeBean;
+import com.chj.googleplay.http.HomeProtocol;
+import com.chj.googleplay.ui.adapter.SuperBaseAdapter;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
-import com.chj.googleplay.ui.fragment.adapter.SuperBaseAdapter;
 import com.chj.googleplay.ui.holder.AppItemHolder;
 import com.chj.googleplay.ui.holder.BaseHolder;
 import com.chj.googleplay.utils.UIUtils;
@@ -28,7 +35,11 @@ import com.chj.googleplay.utils.UIUtils;
  */
 public class HomeFragment extends BaseFragment
 {
-	private List<String>	mDatas;
+	private List<AppInfoBean>	mListDatas; // listView对应的数据
+	private List<String>		mPictures;	// 轮播图数据
+
+	private HomeBean			mDataBean;
+	private HomeProtocol		mProtocol;
 
 	@Override
 	protected View onSuccessView()
@@ -41,8 +52,15 @@ public class HomeFragment extends BaseFragment
 
 		ListView mListView = new ListView(UIUtils.getContext());
 
+		// 设置listView的样式
+		mListView.setCacheColorHint(Color.TRANSPARENT);
+		mListView.setSelector(android.R.color.transparent);
+		mListView.setFadingEdgeLength(0);// 设置边缘
+		mListView.setDividerHeight(0);// 设置分割线
+		mListView.setBackgroundColor(UIUtils.getCoclor(R.color.bg));
+
 		// adapter ---> list
-		mListView.setAdapter(new AppListAdapter(mDatas));
+		mListView.setAdapter(new AppListAdapter(mListView, mListDatas));
 
 		return mListView;
 
@@ -71,27 +89,143 @@ public class HomeFragment extends BaseFragment
 		// return results[rdm.nextInt(results.length)];
 
 		// 模拟数据加载
+		//
+		// mDatas = new LinkedList<String>();
+		// for (int i = 0; i < 50; i++)
+		// {
+		// mDatas.add("" + i);
+		// }
 
-		mDatas = new LinkedList<String>();
-		for (int i = 0; i < 50; i++)
+		// 去网络获取数据
+		// HttpUtils utils = new HttpUtils();
+		// String url = "http://49.122.47.187:8080/GooglePlayServer/home";
+		//
+		// RequestParams params = new RequestParams();
+		// params.addQueryStringParameter("index", 0 + "");
+		//
+		// try
+		// {
+		// ResponseStream stream = utils.sendSync(HttpMethod.GET, url, params);
+		//
+		// int statusCode = stream.getStatusCode();
+		// if (statusCode == 200)
+		// {
+		// // 正确返回
+		// String json = stream.readString();
+		// LogUtils.d(json);
+		//
+		// // 解析json
+		// Gson gson = new Gson();
+		// mDataBean = gson.fromJson(json, HomeBean.class);
+		//
+		// if (mDataBean == null) { return LoadedResult.EMPTY; }
+		//
+		// mListDatas = mDataBean.list;
+		// mPictures = mDataBean.picture;
+		//
+		// if (mListDatas == null || mListDatas.size() == 0) { return
+		// LoadedResult.EMPTY; }
+		// }
+		// else
+		// {
+		// return LoadedResult.ERROR;
+		// }
+		// }
+		// catch (Exception e)
+		// {
+		// e.printStackTrace();
+		// return LoadedResult.ERROR;
+		// }
+		//
+		// return LoadedResult.SUCCESS;
+
+		mProtocol = new HomeProtocol();
+		try
 		{
-			mDatas.add("" + i);
+			mDataBean = mProtocol.loadData(0);
+
+			if (mDataBean == null) { return LoadedResult.EMPTY; }
+
+			LoadedResult state = checkState(mDataBean);
+			if (state == LoadedResult.EMPTY) { return state; }
+
+			mListDatas = mDataBean.list;
+			mPictures = mDataBean.picture;
+
+			return checkState(mListDatas);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return LoadedResult.ERROR;
 		}
 
-		return LoadedResult.SUCCESS;
 	}
 
-	class AppListAdapter extends SuperBaseAdapter<String>
+	class AppListAdapter extends SuperBaseAdapter<AppInfoBean>
 	{
-		public AppListAdapter(List<String> datas) {
-			super(datas);
+
+		public AppListAdapter(AbsListView listView, List<AppInfoBean> datas) {
+			super(listView, datas);
 		}
 
 		@Override
-		protected BaseHolder<String> getHolder()
+		protected BaseHolder<AppInfoBean> getHolder()
 		{
 			return new AppItemHolder();
 		}
+
+		@Override
+		protected List<AppInfoBean> onLoadMoreData() throws Exception
+		{
+			return loadMoreData(mDatas.size());
+		}
+
+		@Override
+		protected void onInnerItemClick(AdapterView<?> parent, View view, int position, long id)
+		{
+			AppInfoBean bean = mDatas.get(position);
+			Toast.makeText(UIUtils.getContext(), bean.name, 0).show();
+		}
+
+	}
+
+	/** 网络加载数据 */
+	private List<AppInfoBean> loadMoreData(int index) throws Exception
+	{
+		// HttpUtils utils = new HttpUtils();
+		// String url = "http://49.122.47.187:8080/GooglePlayServer/home";
+		//
+		// RequestParams params = new RequestParams();
+		// params.addQueryStringParameter("index", index + "");
+		//
+		// ResponseStream stream = utils.sendSync(HttpMethod.GET, url, params);
+		//
+		// int statusCode = stream.getStatusCode();
+		// if (statusCode == 200)
+		// {
+		// // 正确返回
+		// String json = stream.readString();
+		// LogUtils.d(json);
+		//
+		// // 解析json
+		// Gson gson = new Gson();
+		// HomeBean bean = gson.fromJson(json, HomeBean.class);
+		//
+		// if (bean == null) { return null; }
+		//
+		// return bean.list;
+		// }
+		// else
+		// {
+		// return null;
+		// }
+
+		// 抽取，优化之后的
+		HomeBean bean = mProtocol.loadData(index);
+
+		return bean.list;
+
 	}
 
 }
