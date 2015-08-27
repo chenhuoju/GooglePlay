@@ -2,14 +2,11 @@ package com.chj.googleplay.ui.fragment;
 
 import java.util.List;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.chj.googleplay.R;
 import com.chj.googleplay.bean.AppInfoBean;
 import com.chj.googleplay.bean.HomeBean;
 import com.chj.googleplay.http.HomeProtocol;
@@ -17,6 +14,7 @@ import com.chj.googleplay.ui.adapter.SuperBaseAdapter;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
 import com.chj.googleplay.ui.holder.AppItemHolder;
 import com.chj.googleplay.ui.holder.BaseHolder;
+import com.chj.googleplay.ui.weight.BaseListView;
 import com.chj.googleplay.utils.UIUtils;
 
 /**
@@ -50,14 +48,15 @@ public class HomeFragment extends BaseFragment
 		// tv.setTextSize(24);
 		// return tv;
 
-		ListView mListView = new ListView(UIUtils.getContext());
-
-		// 设置listView的样式
-		mListView.setCacheColorHint(Color.TRANSPARENT);
-		mListView.setSelector(android.R.color.transparent);
-		mListView.setFadingEdgeLength(0);// 设置边缘
-		mListView.setDividerHeight(0);// 设置分割线
-		mListView.setBackgroundColor(UIUtils.getCoclor(R.color.bg));
+		// ListView mListView = new ListView(UIUtils.getContext());
+		// // 设置listView的样式
+		// mListView.setCacheColorHint(Color.TRANSPARENT);
+		// mListView.setSelector(android.R.color.transparent);
+		// mListView.setFadingEdgeLength(0);// 设置边缘
+		// mListView.setDividerHeight(0);// 设置分割线
+		// mListView.setBackgroundColor(UIUtils.getCoclor(R.color.bg));
+		// 抽取，优化之后
+		BaseListView mListView = new BaseListView(UIUtils.getContext());
 
 		// adapter ---> list
 		mListView.setAdapter(new AppListAdapter(mListView, mListDatas));

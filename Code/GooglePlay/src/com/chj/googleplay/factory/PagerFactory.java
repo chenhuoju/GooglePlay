@@ -3,6 +3,7 @@ package com.chj.googleplay.factory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.chj.googleplay.ui.fragment.AppFragment;
 import com.chj.googleplay.ui.fragment.BaseFragment;
 import com.chj.googleplay.ui.fragment.HomeFragment;
 
@@ -42,7 +43,7 @@ public class PagerFactory
 				fragment = new HomeFragment();
 				break;
 			case 1:// 应用
-				fragment = new HomeFragment();
+				fragment = new AppFragment();
 				break;
 			case 2:// 游戏
 				fragment = new HomeFragment();
