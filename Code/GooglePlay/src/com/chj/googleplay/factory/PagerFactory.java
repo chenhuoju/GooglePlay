@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.chj.googleplay.ui.fragment.BaseFragment;
 import com.chj.googleplay.ui.fragment.HomeFragment;
-import com.chj.googleplay.utils.LogUtils;
 
 /**
  * @包名: com.chj.googleplay.factory
@@ -33,7 +32,7 @@ public class PagerFactory
 		// 判断缓存中是否有
 		if (fragment != null)
 		{
-			LogUtils.d("读取缓存 :" + position);// 打印日志
+			// LogUtils.d("读取缓存 :" + position);// 打印日志
 			return fragment;
 		}
 
@@ -66,7 +65,7 @@ public class PagerFactory
 
 		// 存储到缓存
 		mCaches.put(position, fragment);
-		LogUtils.d("新建缓存 :" + position);// 打印日志
+		// LogUtils.d("新建缓存 :" + position);// 打印日志
 
 		return fragment;
 	}
