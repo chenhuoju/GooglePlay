@@ -14,7 +14,7 @@ import android.widget.ListView;
  * @作者: 陈火炬
  * @创建时间 : 2015-8-27 下午4:10:38
  * 
- * @描述: TODO
+ * @描述: listView基类，设置listView的一些样式
  * 
  * @SVN版本: $Rev$
  * @更新人: $Author$
