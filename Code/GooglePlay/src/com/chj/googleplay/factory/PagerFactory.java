@@ -9,6 +9,7 @@ import com.chj.googleplay.ui.fragment.CategoryFragment;
 import com.chj.googleplay.ui.fragment.GameFragment;
 import com.chj.googleplay.ui.fragment.HomeFragment;
 import com.chj.googleplay.ui.fragment.HotFragment;
+import com.chj.googleplay.ui.fragment.RecommendFragment;
 import com.chj.googleplay.ui.fragment.SubjectFragment;
 
 /**
@@ -56,7 +57,7 @@ public class PagerFactory
 				fragment = new SubjectFragment();
 				break;
 			case 4:// 推荐
-				fragment = new HomeFragment();
+				fragment = new RecommendFragment();
 				break;
 			case 5:// 分类
 				fragment = new CategoryFragment();

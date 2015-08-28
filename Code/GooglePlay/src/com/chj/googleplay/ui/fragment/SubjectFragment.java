@@ -11,7 +11,7 @@ import com.chj.googleplay.ui.adapter.SuperBaseAdapter;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
 import com.chj.googleplay.ui.holder.BaseHolder;
 import com.chj.googleplay.ui.holder.SubjectHolder;
-import com.chj.googleplay.ui.weight.BaseListView;
+import com.chj.googleplay.ui.widget.BaseListView;
 import com.chj.googleplay.utils.UIUtils;
 
 /**

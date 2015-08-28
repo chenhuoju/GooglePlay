@@ -11,12 +11,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chj.googleplay.http.HotProtocol;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
-import com.chj.googleplay.ui.weight.FlowLayout;
+import com.chj.googleplay.ui.widget.FlowLayout;
 import com.chj.googleplay.utils.DrawableUtils;
+import com.chj.googleplay.utils.ToastUtils;
 import com.chj.googleplay.utils.UIUtils;
 
 /**
@@ -106,7 +106,8 @@ public class HotFragment extends BaseFragment
 				@Override
 				public void onClick(View v)
 				{
-					Toast.makeText(UIUtils.getContext(), text, 0).show();
+					// Toast.makeText(UIUtils.getContext(), text, 0).show();
+					ToastUtils.showToast(UIUtils.getContext(), text);
 				}
 			});
 		}

@@ -14,7 +14,7 @@
 
         <!-- 使用宽高比，进行控制imageView的大小 -->
 
-        <com.chj.googleplay.ui.weight.RatioLayout
+        <com.chj.googleplay.ui.widget.RatioLayout
             xmlns:chj="http://schemas.android.com/apk/res/com.chj.googleplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_default" />
-        </com.chj.googleplay.ui.weight.RatioLayout>
+        </com.chj.googleplay.ui.widget.RatioLayout>
 
         <TextView
             android:id="@+id/item_subject_tv_des"

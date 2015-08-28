@@ -13,7 +13,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
 import com.chj.googleplay.R;
-import com.chj.googleplay.ui.weight.TouchedViewPager;
+import com.chj.googleplay.ui.widget.TouchedViewPager;
 import com.chj.googleplay.utils.BitmapHelper;
 import com.chj.googleplay.utils.Constants;
 import com.chj.googleplay.utils.UIUtils;
