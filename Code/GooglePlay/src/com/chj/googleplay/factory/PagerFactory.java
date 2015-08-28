@@ -7,6 +7,7 @@ import com.chj.googleplay.ui.fragment.AppFragment;
 import com.chj.googleplay.ui.fragment.BaseFragment;
 import com.chj.googleplay.ui.fragment.GameFragment;
 import com.chj.googleplay.ui.fragment.HomeFragment;
+import com.chj.googleplay.ui.fragment.HotFragment;
 import com.chj.googleplay.ui.fragment.SubjectFragment;
 
 /**
@@ -60,9 +61,10 @@ public class PagerFactory
 				fragment = new HomeFragment();
 				break;
 			case 6:// 排行
-				fragment = new HomeFragment();
+				fragment = new HotFragment();
 				break;
 			default:
+				fragment = new HomeFragment();
 				break;
 		}
 

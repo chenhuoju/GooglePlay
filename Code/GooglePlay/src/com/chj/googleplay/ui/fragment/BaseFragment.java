@@ -91,7 +91,7 @@ public abstract class BaseFragment extends Fragment
 		}
 	}
 
-	/** 状态判断 */
+	/** 判断状态是否为空 */
 	@SuppressWarnings("rawtypes")
 	protected LoadedResult checkState(Object data)
 	{

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="DrawAllocation" severity="ignore" />
+    <issue id="NewApi">
+        <ignore path="src/com/chj/googleplay/ui/fragment/HotFragment.java" />
+    </issue>
     <issue id="ResourceAsColor">
         <ignore path="src/com/chj/googleplay/ui/fragment/HomeFragment.java" />
     </issue>
