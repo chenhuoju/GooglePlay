@@ -7,7 +7,8 @@
     <issue id="ResourceAsColor">
         <ignore path="src/com/chj/googleplay/ui/fragment/HomeFragment.java" />
     </issue>
-    <issue id="ShowToast">
+    <issue id="ShowToast" severity="ignore">
         <ignore path="src/com/chj/googleplay/ui/fragment/HomeFragment.java" />
+        <ignore path="src/com/chj/googleplay/ui/fragment/HotFragment.java" />
     </issue>
 </lint>

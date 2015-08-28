@@ -73,7 +73,7 @@ public class SubjectFragment extends BaseFragment
 		}
 
 		@Override
-		protected BaseHolder<SubjectBean> getHolder()
+		protected BaseHolder<SubjectBean> getHolder(int position)
 		{
 			return new SubjectHolder();
 		}

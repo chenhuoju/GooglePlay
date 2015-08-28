@@ -73,7 +73,7 @@ public class GameFragment extends BaseFragment
 		}
 
 		@Override
-		protected BaseHolder<AppInfoBean> getHolder()
+		protected BaseHolder<AppInfoBean> getHolder(int position)
 		{
 			return new AppItemHolder();
 		}

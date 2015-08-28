@@ -86,6 +86,12 @@ public abstract class SuperBaseAdapter<T> extends BaseAdapter implements OnItemC
 			// 加载更多的类型
 			return VIEW_TYPE_LOAD_MORE;
 		}
+		return getInnerItemViewType(position);
+	}
+
+	/** 如果子类的listView的item的类型有多种，就去复写这个方法 */
+	protected int getInnerItemViewType(int position)
+	{
 		return VIEW_TYPE_LIST_NORMAL;
 	}
 
@@ -106,7 +112,7 @@ public abstract class SuperBaseAdapter<T> extends BaseAdapter implements OnItemC
 			else
 			{
 				// 1.holder初始化
-				holder = getHolder();
+				holder = getHolder(position);
 			}
 			// 2.加载view
 			convertView = holder.getRootView();
@@ -153,7 +159,7 @@ public abstract class SuperBaseAdapter<T> extends BaseAdapter implements OnItemC
 	}
 
 	/** 是否有加载更多的功能，默认有，如果子类不希望有加载更多的功能，去复写这个方法 */
-	private boolean hasLoadMore()
+	protected boolean hasLoadMore()
 	{
 		return true;
 	}
@@ -175,7 +181,8 @@ public abstract class SuperBaseAdapter<T> extends BaseAdapter implements OnItemC
 		return mLoadMoreHolder;
 	}
 
-	protected abstract BaseHolder<T> getHolder();
+	/** 获取持有者 */
+	protected abstract BaseHolder<T> getHolder(int position);
 
 	/** listView中的条目点击事件 */
 	@Override

@@ -5,7 +5,6 @@ import java.util.List;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.chj.googleplay.bean.AppInfoBean;
 import com.chj.googleplay.bean.HomeBean;
@@ -16,6 +15,7 @@ import com.chj.googleplay.ui.holder.AppItemHolder;
 import com.chj.googleplay.ui.holder.BaseHolder;
 import com.chj.googleplay.ui.holder.HomePictureHolder;
 import com.chj.googleplay.ui.weight.BaseListView;
+import com.chj.googleplay.utils.ToastUtils;
 import com.chj.googleplay.utils.UIUtils;
 
 /**
@@ -177,7 +177,7 @@ public class HomeFragment extends BaseFragment
 		}
 
 		@Override
-		protected BaseHolder<AppInfoBean> getHolder()
+		protected BaseHolder<AppInfoBean> getHolder(int position)
 		{
 			return new AppItemHolder();
 		}
@@ -192,7 +192,8 @@ public class HomeFragment extends BaseFragment
 		protected void onInnerItemClick(AdapterView<?> parent, View view, int position, long id)
 		{
 			AppInfoBean bean = mDatas.get(position);
-			Toast.makeText(UIUtils.getContext(), bean.name, 0).show();
+			// Toast.makeText(UIUtils.getContext(), bean.name, 0).show();
+			ToastUtils.showToast(UIUtils.getContext(), bean.name);
 		}
 
 	}

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.chj.googleplay.ui.fragment.AppFragment;
 import com.chj.googleplay.ui.fragment.BaseFragment;
+import com.chj.googleplay.ui.fragment.CategoryFragment;
 import com.chj.googleplay.ui.fragment.GameFragment;
 import com.chj.googleplay.ui.fragment.HomeFragment;
 import com.chj.googleplay.ui.fragment.HotFragment;
@@ -58,7 +59,7 @@ public class PagerFactory
 				fragment = new HomeFragment();
 				break;
 			case 5:// 分类
-				fragment = new HomeFragment();
+				fragment = new CategoryFragment();
 				break;
 			case 6:// 排行
 				fragment = new HotFragment();
