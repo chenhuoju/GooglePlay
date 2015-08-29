@@ -10,7 +10,10 @@
         android:id="@+id/app_detail_bottom_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/detail_bottom_bg"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp" >
     </FrameLayout>
 
     <!-- 内容区域 -->

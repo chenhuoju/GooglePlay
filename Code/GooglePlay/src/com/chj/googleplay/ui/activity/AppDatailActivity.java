@@ -12,6 +12,7 @@ import com.chj.googleplay.http.AppDetailProtocol;
 import com.chj.googleplay.ui.fragment.LoadingPager;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
 import com.chj.googleplay.ui.holder.AppDetailDesHolder;
+import com.chj.googleplay.ui.holder.AppDetailDownloadHolder;
 import com.chj.googleplay.ui.holder.AppDetailInfoHolder;
 import com.chj.googleplay.ui.holder.AppDetailPicHolder;
 import com.chj.googleplay.ui.holder.AppDetailSafeHolder;
@@ -163,6 +164,11 @@ public class AppDatailActivity extends BaseActivity
 		AppDetailDesHolder desHolder = new AppDetailDesHolder();
 		mContainerDes.addView(desHolder.getRootView()); // 加载视图
 		desHolder.setData(mData);// 设置数据
+
+		// 加载应用的下载部分
+		AppDetailDownloadHolder downloadHolder = new AppDetailDownloadHolder();
+		mContainerBottom.addView(downloadHolder.getRootView());// 加载视图
+		downloadHolder.setData(mData);// 设置数据
 
 		return view;
 	}
