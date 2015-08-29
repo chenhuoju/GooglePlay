@@ -94,6 +94,12 @@ public class UIUtils
 		return getResources().getString(resId);
 	}
 
+	/** 获取字符串的值和其他参数 */
+	public static String getString(int resId, Object... formatArgs)
+	{
+		return getResources().getString(resId, formatArgs);
+	}
+
 	/** 获取包名 */
 	public static String getPackageName()
 	{

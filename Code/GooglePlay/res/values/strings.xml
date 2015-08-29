@@ -20,4 +20,11 @@
         <item>排行</item>
     </string-array>
 
+    <!-- 利用占位符(%:代表占位符;1:代表第一位;s:代表String类型) -->
+    <string name="app_detail_info_downloadnum">下载: %1s</string>
+    <string name="app_detail_info_version">版本：%1s</string>
+    <string name="app_detail_info_date">时间：%1s</string>
+    <string name="app_detail_info_size">大小：%1s</string>
+    <string name="app_detail_des_author">作者：%1s</string>
+
 </resources>

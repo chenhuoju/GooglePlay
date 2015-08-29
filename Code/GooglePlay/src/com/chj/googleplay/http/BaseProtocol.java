@@ -63,16 +63,40 @@ public abstract class BaseProtocol<T>
 
 	}
 
+	/** 获取额外名称,做标记用的 */
+	private String getExtraName()
+	{
+		Map<String, String> map = getParameters();
+
+		if (map != null)
+		{
+			StringBuffer sb = new StringBuffer();
+			for (Map.Entry<String, String> me : map.entrySet())
+			{
+				String key = me.getKey();
+				String value = me.getValue();
+
+				sb.append("_");
+				sb.append(key);
+				sb.append("_");
+				sb.append(value);
+			}
+			return sb.toString();
+		}
+
+		return "";
+	}
+
 	/** 从缓存中获取数据 */
 	private T getDataFromLocal(int index) throws Exception
 	{
 		// 存储缓存
 		// 1.存储为文件 --->文件名的命名规范
-		// ------> getKey() + "." + index
+		// ------> getKey() + "." + index + (parameters(标记) _key_value)
 		// 2.文件内容的 --->文件内容中的规范
 		// ------> 时间戳 + "\r\n" +json
 
-		String name = getKey() + "." + index;
+		String name = getKey() + "." + index + getExtraName();
 		File file = new File(FileUtils.getDir(DIR), name);
 
 		// 如果文件不存在，说明本地没有缓存
@@ -116,21 +140,12 @@ public abstract class BaseProtocol<T>
 		params.addQueryStringParameter("index", index + "");
 
 		// 存在其他参数的判断和解决
-//		Map<String, String> parameters = getParameters();
-//		if (parameters != null)
-//		{
-//			for (Map.Entry<String, String> param : parameters.entrySet())
-//			{
-//				params.addQueryStringParameter(param.getKey(), param.getValue());
-//			}
-//		}
-		
-		Map<String, String> parmaters = getParameters();
-		if (parmaters != null)
+		Map<String, String> parameters = getParameters();
+		if (parameters != null)
 		{
-			for (Map.Entry<String, String> me : parmaters.entrySet())
+			for (Map.Entry<String, String> param : parameters.entrySet())
 			{
-				params.addQueryStringParameter(me.getKey(), me.getValue());
+				params.addQueryStringParameter(param.getKey(), param.getValue());
 			}
 		}
 
@@ -159,11 +174,11 @@ public abstract class BaseProtocol<T>
 	{
 		// 存储缓存
 		// 1.存储为文件 --->文件名的命名规范
-		// ------> getKey() + "." + index
+		// ------> getKey() + "." + index + (parameters(标记) _key_value)
 		// 2.文件内容的 --->文件内容中的规范
 		// ------> 时间戳 + "\r\n" +json
 
-		String name = getKey() + "." + index;
+		String name = getKey() + "." + index + getExtraName();
 		File file = new File(FileUtils.getDir(DIR), name);
 
 		// 往文件中写数据
@@ -181,5 +196,5 @@ public abstract class BaseProtocol<T>
 			IOUtils.close(writer);
 		}
 	}
-	
+
 }

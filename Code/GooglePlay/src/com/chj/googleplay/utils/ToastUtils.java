@@ -21,6 +21,7 @@ public class ToastUtils
 {
 	public static Toast	mToast;
 
+	/** 弹吐司 */
 	public static void showToast(Context mContext, String msg)
 	{
 		if (mToast == null)

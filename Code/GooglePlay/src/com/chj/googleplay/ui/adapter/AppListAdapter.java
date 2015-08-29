@@ -11,7 +11,6 @@ import com.chj.googleplay.bean.AppInfoBean;
 import com.chj.googleplay.ui.activity.AppDatailActivity;
 import com.chj.googleplay.ui.holder.AppItemHolder;
 import com.chj.googleplay.ui.holder.BaseHolder;
-import com.chj.googleplay.utils.ToastUtils;
 import com.chj.googleplay.utils.UIUtils;
 
 /**
@@ -45,10 +44,11 @@ public class AppListAdapter extends SuperBaseAdapter<AppInfoBean>
 	protected void onInnerItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
 		AppInfoBean bean = mDatas.get(position);
-		ToastUtils.showToast(UIUtils.getContext(), bean.name);
+		// ToastUtils.showToast(UIUtils.getContext(), bean.name);
 
 		Intent intent = new Intent(UIUtils.getContext(), AppDatailActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);// 设置标记
+		intent.putExtra(AppDatailActivity.KEY_PACKAGE_NAME, bean.packageName);// 传递额外值
 		UIUtils.startActivity(intent);
 
 	}

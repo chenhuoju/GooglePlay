@@ -1,6 +1,7 @@
 package com.chj.googleplay.ui.activity;
 
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,6 +11,7 @@ import com.chj.googleplay.bean.AppInfoBean;
 import com.chj.googleplay.http.AppDetailProtocol;
 import com.chj.googleplay.ui.fragment.LoadingPager;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
+import com.chj.googleplay.ui.holder.AppDetailInfoHolder;
 import com.chj.googleplay.utils.UIUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -30,20 +32,22 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  */
 public class AppDatailActivity extends BaseActivity
 {
+	public static final String	KEY_PACKAGE_NAME	= "package_name";
+
 	@ViewInject(R.id.app_detail_info_container)
-	private FrameLayout			mContainerInfo;	// app信息容器
+	private FrameLayout			mContainerInfo;						// app信息容器
 
 	@ViewInject(R.id.app_detail_safe_container)
-	private FrameLayout			mContainerSafe;	// app安全容器
+	private FrameLayout			mContainerSafe;						// app安全容器
 
 	@ViewInject(R.id.app_detail_pic_container)
-	private FrameLayout			mContainerPic;		// app图片容器
+	private FrameLayout			mContainerPic;							// app图片容器
 
 	@ViewInject(R.id.app_detail_des_container)
-	private FrameLayout			mContainerDes;		// app简介容器
+	private FrameLayout			mContainerDes;							// app简介容器
 
 	@ViewInject(R.id.app_detail_bottom_container)
-	private FrameLayout			mContainerBottom;	// 底部容器
+	private FrameLayout			mContainerBottom;						// 底部容器
 
 	private ActionBar			mActionBar;
 
@@ -100,16 +104,21 @@ public class AppDatailActivity extends BaseActivity
 	/** 加载数据时，此方法调用 */
 	private LoadedResult onLoadData()
 	{
+		// 取数据
+		String packageName = getIntent().getStringExtra(KEY_PACKAGE_NAME);
+
+		// 非空判断
+		if (TextUtils.isEmpty(packageName)) { return LoadedResult.EMPTY; }
+
 		// 新建协议
-		// mProtocol = new AppDetailProtocol("com.youyuan.yyhl");
-		mProtocol = new AppDetailProtocol("com.youyuan.yyhl");
+		mProtocol = new AppDetailProtocol(packageName);
 
 		// 去网络加载数据
 		try
 		{
 			mDatas = mProtocol.loadData(0);
 
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 
 			if (mDatas == null) { return LoadedResult.EMPTY; }
 			return LoadedResult.SUCCESS;
@@ -128,7 +137,12 @@ public class AppDatailActivity extends BaseActivity
 		View view = View.inflate(UIUtils.getContext(), R.layout.act_app_detail, null);
 
 		// View的注入
-		ViewUtils.inject(this);
+		ViewUtils.inject(this, view);
+
+		// 加载 应用的信息部分
+		AppDetailInfoHolder infoHolder = new AppDetailInfoHolder();
+		mContainerInfo.addView(infoHolder.getRootView());// 加载视图
+		infoHolder.setData(mDatas);// 设置数据
 
 		return view;
 	}
