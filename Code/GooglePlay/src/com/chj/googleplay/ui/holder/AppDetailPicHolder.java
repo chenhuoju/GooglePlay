@@ -16,11 +16,11 @@ import android.widget.LinearLayout;
 
 /**
  * @包名: com.chj.googleplay.ui.holder
- * @类名: AppDetailInfoHolder
+ * @类名: AppDetailPicHolder
  * @作者: 陈火炬
  * @创建时间 : 2015-8-29 上午9:51:04
  * 
- * @描述: 应用详情页面-图片部分
+ * @描述:
  * 
  * @SVN版本: $Rev$
  * @更新人: $Author$
