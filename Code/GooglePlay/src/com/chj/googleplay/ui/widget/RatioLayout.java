@@ -25,11 +25,11 @@ import android.widget.FrameLayout;
  */
 public class RatioLayout extends FrameLayout
 {
-	private static final int	RELATIVE_WIDTH	= 0;				// 相对宽
-	public static final int		RELATIVE_HEIGHT	= 1;				// 相对高
+	public static final int	RELATIVE_WIDTH	= 0;				// 相对宽
+	public static final int	RELATIVE_HEIGHT	= 1;				// 相对高
 
-	private float				mRatio;							// 宽高比例
-	private int					mRelative		= RELATIVE_WIDTH;	// 相对谁来计算
+	private float			mRatio;							// 宽高比例
+	private int				mRelative		= RELATIVE_WIDTH;	// 相对谁来计算
 
 	public RatioLayout(Context context) {
 		this(context, null);

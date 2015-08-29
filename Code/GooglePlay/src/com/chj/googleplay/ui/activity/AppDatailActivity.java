@@ -12,6 +12,7 @@ import com.chj.googleplay.http.AppDetailProtocol;
 import com.chj.googleplay.ui.fragment.LoadingPager;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
 import com.chj.googleplay.ui.holder.AppDetailInfoHolder;
+import com.chj.googleplay.ui.holder.AppDetailPicHolder;
 import com.chj.googleplay.ui.holder.AppDetailSafeHolder;
 import com.chj.googleplay.utils.UIUtils;
 import com.lidroid.xutils.ViewUtils;
@@ -151,6 +152,11 @@ public class AppDatailActivity extends BaseActivity
 		AppDetailSafeHolder safeHolder = new AppDetailSafeHolder();
 		mContainerSafe.addView(safeHolder.getRootView());// 加载视图
 		safeHolder.setData(mData.safe);// 设置数据
+
+		// 加载应用的图片部分
+		AppDetailPicHolder picHolder = new AppDetailPicHolder();
+		mContainerPic.addView(picHolder.getRootView());// 加载视图
+		picHolder.setData(mData.screen);// 设置数据
 
 		return view;
 	}
