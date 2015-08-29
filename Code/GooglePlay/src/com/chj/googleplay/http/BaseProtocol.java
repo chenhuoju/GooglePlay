@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Map;
 
+import com.chj.googleplay.utils.Constants;
 import com.chj.googleplay.utils.FileUtils;
 import com.chj.googleplay.utils.IOUtils;
 import com.chj.googleplay.utils.LogUtils;
@@ -134,7 +135,8 @@ public abstract class BaseProtocol<T>
 		{
 			utils = new HttpUtils();
 		}
-		String url = "http://49.122.47.187:8080/GooglePlayServer/" + getKey();
+
+		String url = Constants.SERVER_URL + getKey();
 
 		RequestParams params = new RequestParams();
 		params.addQueryStringParameter("index", index + "");

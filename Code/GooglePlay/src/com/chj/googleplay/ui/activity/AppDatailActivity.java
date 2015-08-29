@@ -12,6 +12,7 @@ import com.chj.googleplay.http.AppDetailProtocol;
 import com.chj.googleplay.ui.fragment.LoadingPager;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
 import com.chj.googleplay.ui.holder.AppDetailInfoHolder;
+import com.chj.googleplay.ui.holder.AppDetailSafeHolder;
 import com.chj.googleplay.utils.UIUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -55,7 +56,7 @@ public class AppDatailActivity extends BaseActivity
 
 	private AppDetailProtocol	mProtocol;
 
-	private AppInfoBean			mDatas;
+	private AppInfoBean			mData;
 
 	@Override
 	protected void initView()
@@ -116,11 +117,11 @@ public class AppDatailActivity extends BaseActivity
 		// 去网络加载数据
 		try
 		{
-			mDatas = mProtocol.loadData(0);
+			mData = mProtocol.loadData(0);
 
 			Thread.sleep(1000);
 
-			if (mDatas == null) { return LoadedResult.EMPTY; }
+			if (mData == null) { return LoadedResult.EMPTY; }
 			return LoadedResult.SUCCESS;
 		}
 		catch (Exception e)
@@ -139,10 +140,17 @@ public class AppDatailActivity extends BaseActivity
 		// View的注入
 		ViewUtils.inject(this, view);
 
-		// 加载 应用的信息部分
+		// TODO:应用详情
+
+		// 加载应用的信息部分
 		AppDetailInfoHolder infoHolder = new AppDetailInfoHolder();
 		mContainerInfo.addView(infoHolder.getRootView());// 加载视图
-		infoHolder.setData(mDatas);// 设置数据
+		infoHolder.setData(mData);// 设置数据
+
+		// 加载应用的安全部分
+		AppDetailSafeHolder safeHolder = new AppDetailSafeHolder();
+		mContainerSafe.addView(safeHolder.getRootView());// 加载视图
+		safeHolder.setData(mData.safe);// 设置数据
 
 		return view;
 	}

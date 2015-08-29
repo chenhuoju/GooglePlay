@@ -37,7 +37,7 @@ public class AppInfoBean
 
 	public String				version;
 
-	class AppSafeBean
+	public class AppSafeBean
 	{
 		public String	safeDes;
 		public int		safeDesColor;

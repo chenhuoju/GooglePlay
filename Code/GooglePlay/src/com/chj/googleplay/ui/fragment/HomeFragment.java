@@ -63,7 +63,7 @@ public class HomeFragment extends BaseFragment
 		pictureHolder.setData(mPictures);
 
 		// adapter ---> list
-		mListView.setAdapter(new AppListAdapter(mListView, mListDatas));
+		mListView.setAdapter(new HomeAdapter(mListView, mListDatas));
 
 		return mListView;
 

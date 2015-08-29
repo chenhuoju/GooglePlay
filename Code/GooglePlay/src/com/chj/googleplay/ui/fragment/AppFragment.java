@@ -37,7 +37,7 @@ public class AppFragment extends BaseFragment
 		BaseListView mListView = new BaseListView(UIUtils.getContext());
 
 		// adapter ---> list
-		mListView.setAdapter(new AppListAdapter(mListView, mListDatas));
+		mListView.setAdapter(new AppAdapter(mListView, mListDatas));
 
 		return mListView;
 	}
