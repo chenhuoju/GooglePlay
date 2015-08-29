@@ -3,6 +3,7 @@ package com.chj.googleplay.utils;
 import com.chj.googleplay.BaseApplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -121,6 +122,12 @@ public class UIUtils
 	public static void removeCallbacks(Runnable task)
 	{
 		getMainThreadHandler().removeCallbacks(task);
+	}
+
+	/** 开启activity */
+	public static void startActivity(Intent intent)
+	{
+		getContext().startActivity(intent);
 	}
 
 }

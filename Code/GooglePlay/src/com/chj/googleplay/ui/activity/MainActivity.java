@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity implements DrawerListener, OnPage
 	/** 初始化视图 */
 	protected void initView()
 	{
+		super.initView();
 		setContentView(R.layout.act_main);
 
 		mIndicator = (TabSlidingIndicator) findViewById(R.id.main_indicator);

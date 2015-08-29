@@ -4,18 +4,14 @@ import java.util.List;
 
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 
 import com.chj.googleplay.bean.AppInfoBean;
 import com.chj.googleplay.bean.HomeBean;
 import com.chj.googleplay.http.HomeProtocol;
-import com.chj.googleplay.ui.adapter.SuperBaseAdapter;
+import com.chj.googleplay.ui.adapter.AppListAdapter;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
-import com.chj.googleplay.ui.holder.AppItemHolder;
-import com.chj.googleplay.ui.holder.BaseHolder;
 import com.chj.googleplay.ui.holder.HomePictureHolder;
 import com.chj.googleplay.ui.widget.BaseListView;
-import com.chj.googleplay.utils.ToastUtils;
 import com.chj.googleplay.utils.UIUtils;
 
 /**
@@ -169,31 +165,16 @@ public class HomeFragment extends BaseFragment
 
 	}
 
-	class AppListAdapter extends SuperBaseAdapter<AppInfoBean>
+	class HomeAdapter extends AppListAdapter
 	{
-
-		public AppListAdapter(AbsListView listView, List<AppInfoBean> datas) {
+		public HomeAdapter(AbsListView listView, List<AppInfoBean> datas) {
 			super(listView, datas);
-		}
-
-		@Override
-		protected BaseHolder<AppInfoBean> getHolder(int position)
-		{
-			return new AppItemHolder();
 		}
 
 		@Override
 		protected List<AppInfoBean> onLoadMoreData() throws Exception
 		{
 			return loadMoreData(mDatas.size());
-		}
-
-		@Override
-		protected void onInnerItemClick(AdapterView<?> parent, View view, int position, long id)
-		{
-			AppInfoBean bean = mDatas.get(position);
-			// Toast.makeText(UIUtils.getContext(), bean.name, 0).show();
-			ToastUtils.showToast(UIUtils.getContext(), bean.name);
 		}
 
 	}

@@ -179,8 +179,10 @@ public abstract class LoadingPager extends FrameLayout implements OnClickListene
 		safeUpdateUIStyle();
 	}
 
+	/** 创建view成功时，此方法调用 */
 	protected abstract View onCreateSuccessView();
 
+	/** 开始加载数据时，此方法调用 */
 	protected abstract LoadedResult onStartLoadData();
 
 	class LoadDataTask implements Runnable

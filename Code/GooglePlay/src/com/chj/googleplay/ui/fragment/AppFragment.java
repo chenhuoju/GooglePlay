@@ -7,10 +7,8 @@ import android.widget.AbsListView;
 
 import com.chj.googleplay.bean.AppInfoBean;
 import com.chj.googleplay.http.AppProtocol;
-import com.chj.googleplay.ui.adapter.SuperBaseAdapter;
+import com.chj.googleplay.ui.adapter.AppListAdapter;
 import com.chj.googleplay.ui.fragment.LoadingPager.LoadedResult;
-import com.chj.googleplay.ui.holder.AppItemHolder;
-import com.chj.googleplay.ui.holder.BaseHolder;
 import com.chj.googleplay.ui.widget.BaseListView;
 import com.chj.googleplay.utils.UIUtils;
 
@@ -65,17 +63,11 @@ public class AppFragment extends BaseFragment
 
 	}
 
-	class AppListAdapter extends SuperBaseAdapter<AppInfoBean>
+	class AppAdapter extends AppListAdapter
 	{
 
-		public AppListAdapter(AbsListView listView, List<AppInfoBean> datas) {
+		public AppAdapter(AbsListView listView, List<AppInfoBean> datas) {
 			super(listView, datas);
-		}
-
-		@Override
-		protected BaseHolder<AppInfoBean> getHolder(int position)
-		{
-			return new AppItemHolder();
 		}
 
 		@Override

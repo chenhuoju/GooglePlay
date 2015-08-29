@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Map;
 
 import com.chj.googleplay.utils.FileUtils;
 import com.chj.googleplay.utils.IOUtils;
@@ -39,6 +40,12 @@ public abstract class BaseProtocol<T>
 
 	/** 解析json */
 	protected abstract T parseJson(String json);
+
+	/** 其他参数 */
+	protected Map<String, String> getParameters()
+	{
+		return null;
+	}
 
 	public T loadData(int index) throws Exception
 	{
@@ -108,6 +115,25 @@ public abstract class BaseProtocol<T>
 		RequestParams params = new RequestParams();
 		params.addQueryStringParameter("index", index + "");
 
+		// 存在其他参数的判断和解决
+//		Map<String, String> parameters = getParameters();
+//		if (parameters != null)
+//		{
+//			for (Map.Entry<String, String> param : parameters.entrySet())
+//			{
+//				params.addQueryStringParameter(param.getKey(), param.getValue());
+//			}
+//		}
+		
+		Map<String, String> parmaters = getParameters();
+		if (parmaters != null)
+		{
+			for (Map.Entry<String, String> me : parmaters.entrySet())
+			{
+				params.addQueryStringParameter(me.getKey(), me.getValue());
+			}
+		}
+
 		ResponseStream stream = utils.sendSync(HttpMethod.GET, url, params);// 获取响应流
 
 		int statusCode = stream.getStatusCode();// 获取响应码
@@ -155,4 +181,5 @@ public abstract class BaseProtocol<T>
 			IOUtils.close(writer);
 		}
 	}
+	
 }
