@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="内容"
+            android:textColor="@android:color/darker_gray"
             android:textSize="14sp" />
 
         <!-- 作者区域 -->

@@ -19,10 +19,10 @@ import java.util.List;
 public class AppInfoBean
 {
 	public String				des;
-	public String				downloadUrl;
+	public String				downloadUrl;	// 下载的地址
 	public String				iconUrl;
 	public long					id;
-	public String				name;
+	public String				name;			// 下载的名称
 	public String				packageName;
 	public long					size;
 	public float				stars;

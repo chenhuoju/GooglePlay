@@ -20,12 +20,15 @@ public interface Constants
 	// String SERVER_URL = "http://localhost:8090/GooglePlayServer/";
 
 	/** 电脑服务器地址(192.168.89.1) */
-	String	SERVER_URL		= "http://49.122.47.187:8080/GooglePlayServer/";
+	String	SERVER_URL			= "http://49.122.47.187:8080/GooglePlayServer/";
 
 	/** 图片基本访问地址 */
-	String	BASE_IMAGE_URL	= SERVER_URL + "image?name=";
+	String	BASE_IMAGE_URL		= SERVER_URL + "image?name=";
+
+	/** 应用下载地址 */
+	String	BASE_DOWNLOAD_URL	= SERVER_URL + "download";
 
 	/** 页面数量 */
-	int		PAGE_SIZE		= 20;
+	int		PAGE_SIZE			= 20;
 
 }

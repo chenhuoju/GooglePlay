@@ -19,7 +19,12 @@ public class ThreadManager
 	/** 长时间运行的线程池 */
 	private static ThreadPoolProxy	mLongPool;
 	/** 长时间运行的锁 */
-	private static Object			mLongLock	= new Object();
+	private static Object			mLongLock		= new Object();
+
+	/** 长时间下载的线程池 */
+	private static ThreadPoolProxy	mDownlongPool;
+	/** 长时间下载的锁 */
+	private static Object			mDownlongLock	= new Object();
 
 	/** 获取长时间运行的线程池 */
 	public static ThreadPoolProxy getLongRunPool()
@@ -36,6 +41,23 @@ public class ThreadManager
 
 		}
 		return mLongPool;
+	}
+
+	/** 专门负责下载的线程池 */
+	public static ThreadPoolProxy getDownloadPool()
+	{
+		if (mDownlongPool == null)
+		{
+			synchronized (mDownlongLock)
+			{
+				if (mDownlongPool == null)
+				{
+					mDownlongPool = new ThreadPoolProxy(3, 3, 5L);
+				}
+			}
+
+		}
+		return mDownlongPool;
 	}
 
 }

@@ -12,10 +12,12 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.chj.googleplay.R;
 import com.chj.googleplay.factory.PagerFactory;
 import com.chj.googleplay.ui.fragment.BaseFragment;
+import com.chj.googleplay.ui.holder.MenuHolder;
 import com.chj.googleplay.utils.UIUtils;
 import com.chj.indicator.lib.TabSlidingIndicator;
 
@@ -46,6 +48,8 @@ public class MainActivity extends BaseActivity implements DrawerListener, OnPage
 
 	private String[]				mTitles;
 
+	private FrameLayout				mMenuContainer; // 菜单容器
+
 	/** 初始化视图 */
 	protected void initView()
 	{
@@ -54,6 +58,7 @@ public class MainActivity extends BaseActivity implements DrawerListener, OnPage
 
 		mIndicator = (TabSlidingIndicator) findViewById(R.id.main_indicator);
 		mPager = (ViewPager) findViewById(R.id.main_viewpager);
+		mMenuContainer = (FrameLayout) findViewById(R.id.main_menu);
 	}
 
 	/** 初始化ActionBar */
@@ -97,6 +102,11 @@ public class MainActivity extends BaseActivity implements DrawerListener, OnPage
 
 		// 给indicator配置Viewpager
 		mIndicator.setViewPager(mPager);
+
+		// 加载menu
+		MenuHolder menuHolder = new MenuHolder();
+		mMenuContainer.addView(menuHolder.getRootView());
+		// TODO: 设置数据
 	}
 
 	/** 创建选项菜单(ActionBar)时调用 */

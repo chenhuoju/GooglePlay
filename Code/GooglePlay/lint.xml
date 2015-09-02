@@ -3,6 +3,7 @@
     <issue id="DrawAllocation" severity="ignore" />
     <issue id="NewApi">
         <ignore path="src/com/chj/googleplay/ui/fragment/HotFragment.java" />
+        <ignore path="src/com/chj/googleplay/ui/widget/ProgressCircleView.java" />
     </issue>
     <issue id="ResourceAsColor">
         <ignore path="src/com/chj/googleplay/ui/fragment/HomeFragment.java" />

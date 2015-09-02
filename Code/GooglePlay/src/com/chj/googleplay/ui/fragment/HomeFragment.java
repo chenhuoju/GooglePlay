@@ -35,6 +35,7 @@ public class HomeFragment extends BaseFragment
 
 	private HomeBean			mDataBean;
 	private HomeProtocol		mProtocol;
+	private HomeAdapter			mAdapter;
 
 	@Override
 	protected View onSuccessView()
@@ -63,10 +64,40 @@ public class HomeFragment extends BaseFragment
 		pictureHolder.setData(mPictures);
 
 		// adapter ---> list
-		mListView.setAdapter(new HomeAdapter(mListView, mListDatas));
+		mAdapter = new HomeAdapter(mListView, mListDatas);
+		mListView.setAdapter(mAdapter);
+
+		// 开启下载的观察者
+		mAdapter.startObserver();
 
 		return mListView;
 
+	}
+
+	/** 获取焦点 */
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+
+		if (mAdapter != null)
+		{
+			// 开启下载的观察者
+			mAdapter.startObserver();
+		}
+	}
+
+	/** 失去焦点 */
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+
+		if (mAdapter != null)
+		{
+			// 停止下载的观察者
+			mAdapter.stopObserver();
+		}
 	}
 
 	/** 此方法是在子线程中执行的 */
